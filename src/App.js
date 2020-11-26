@@ -1,16 +1,17 @@
 
-import React, {useState,useEffect, useDebugValue} from 'react';
+import React, {useState,useEffect} from 'react';
 import './App.css';
-import  reglas from './reglas.jpg';
+import  Reglas from './Reglas.js';
+import ResultadoGlobal from './ResultadoGlobal';
 
 
 function App() {
   const [jugada,setJugada]= useState()
-  const [jugadas,setJugadas] = useState([{nombre:"Piedra",ganaA:["Lagarto","Tijera"]},
-                                        {nombre:"Papel",ganaA:["Piedra","Spock"]},
-                                        {nombre:"Tijera",ganaA:["Lagarto","Papel"]},
-                                        {nombre:"Lagarto",ganaA:["Spock","Papel"]},
-                                        {nombre:"Spock",ganaA:["Tijeras","Piedra"]}])
+  const jugadas = [ {nombre:"Piedra",ganaA:["Lagarto","Tijera"]},
+                    {nombre:"Papel",ganaA:["Piedra","Spock"]},
+                    {nombre:"Tijera",ganaA:["Lagarto","Papel"]},
+                    {nombre:"Lagarto",ganaA:["Spock","Papel"]},
+                    {nombre:"Spock",ganaA:["Tijeras","Piedra"]}]
   const [inicioPartida,setInicioPartida] = useState(false)
   const [jugadaApp,setJugadaApp]= useState()
   const [noEligioJugada,setNoEligioJugada] = useState(false)
@@ -37,15 +38,16 @@ function App() {
   const setResultadoPartida= (jugadaDeApp) => {
     let esEmpate = jugada == jugadaDeApp.nombre
     let ganoPartida = !jugadaDeApp.ganaA.some(elem => elem == jugada)
+    // matriz  de resultado. buscar
     if(esEmpate){
       setResultado("Empate!! Vuelve a jugar para ganar ;)")
       setclaseSegunResultado("alert-warning")
     }else if(ganoPartida){
-      setResultado("Ganaste!! Podras hacerlo de nuevo? ;)")
+      setResultado("Ganaste!! Podrás hacerlo de nuevo? ;)")
       setGanadasJugador(ganadasJugador+1)
       setclaseSegunResultado("alert-success")
     }else{
-      setResultado("Perdiste, una lastima :( Lo intentas de nuevo?")
+      setResultado("Perdiste, una lástima :( Lo intentas de nuevo?")
       setGanadasApp(ganadasApp+1)
       setclaseSegunResultado("alert-danger")
     }
@@ -99,7 +101,7 @@ function App() {
               </div>   
           </div>
           {inicioPartida && <div class={"alert "+ claseSegunResultado} role="alert">
-            <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
+            <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada de la app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
             </div>}
           {noEligioJugada && <div class="alert alert-warning" role="alert">Tiene que elegir una jugada</div>}
           {!inicioPartida && <button type="button" class="btn btn-info" onClick={jugar}>Jugar!</button>}
@@ -107,43 +109,8 @@ function App() {
         </div>
         
         <div className="resultado">
-          <table class="table table-sm table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Ganadas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Jugador</th>
-                <td>{ganadasJugador}</td>
-              </tr>
-              <tr>
-                <th scope="row">App</th>
-                <td>{ganadasApp}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="reglas">
-            <div class="card text-white bg-secondary mb-3">
-              <div class="card-header"><h5 class="card-title">Reglas</h5></div>
-              <div class="card-body">
-                
-                <p class="card-text">- Tijeras cortan Papel.</p>
-                <p class="card-text">- Papel tapa a Pieda.</p>
-                <p class="card-text">- Piedra aplasta a Lagarto.</p>
-                <p class="card-text">- Lagarto envenena a Spock.</p>
-                <p class="card-text">- Spock rompe Tijeras.</p>
-                <p class="card-text">- Tijeras decapitan lagarto.</p>
-                <p class="card-text">- Lagarto devora Papel.</p>
-                <p class="card-text">- Papel desautoriza Spock.</p>
-                <p class="card-text">- Spock vaporiza Piedra.</p>
-                <p class="card-text">- Piedras aplasta a Tijeras.</p>
-              </div>
-            </div>
-          </div>
+          <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} />
+          <Reglas/>
         </div>
 
         
