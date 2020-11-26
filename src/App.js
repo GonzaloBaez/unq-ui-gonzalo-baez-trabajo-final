@@ -1,54 +1,91 @@
 
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useDebugValue} from 'react';
 import './App.css';
 import  reglas from './reglas.jpg';
 
 
 function App() {
-  const [piedraSelected,setPiedraSelect]= useState(false)
-  const [papelSelected,setPapelaSelect]= useState(false)
-  const [tijeraSelected,setTijeraSelect]= useState(false)
-
+  const [jugada,setJugada]= useState()
+  const [jugadas,setJugadas] = useState([{nombre:"piedra",ganaA:["lagarto","tijera"]},
+                                        {nombre:"papel",ganaA:["piedra","spoke"]},
+                                        {nombre:"tijera",ganaA:["lagarto","papel"]},
+                                        {nombre:"lagarto",ganaA:["spock","papel"]},
+                                        {nombre:"spock",ganaA:["tijeras","piedra"]}])
+  const [inicioPartida,setInicioPartida] = useState(false)
+  const [jugadaApp,setJugadaApp]= useState()
+  const [noEligioJugada,setNoEligioJugada] = useState(false)
+  
+  const numeroAleatorio = () =>{
+    return Math.floor(Math.random() * (jugadas.length))
+  }
   const handleOnClick = (event) =>{
-   
-    setPiedraSelect(!piedraSelected)
-    console.log(this.name)
-    
+    let jugada = event.target.value
+    setJugada(jugada)
+  }
+
+  const disableEnableInputs = () =>{
+    let inputs = document.getElementsByClassName("form-check-input")
+    Array.from(inputs).forEach((input)=>{
+      input.disabled = !(input.disabled)
+    })
   }
   
+  const jugar = (event) =>{
+    let eligioJugada = !!jugada
+    if(eligioJugada){
+      let numAleatorio = numeroAleatorio()
+      let jugadaAleatoriaApp = jugadas[numAleatorio]
+      setJugadaApp(jugadaAleatoriaApp)
+      setInicioPartida(true)
+      disableEnableInputs()
+      setNoEligioJugada(false)
+    }else{
+      setNoEligioJugada(true)
+    }
+  }
+
+  const reset = (event) =>{
+    setJugadaApp()
+    setInicioPartida(false)
+    disableEnableInputs()
+  }
   return (
     <>
       
         <div>
           <img src={reglas} className="reglas" alt="reglas del juego"/>
         </div>
-        <div class="juego card text-white bg-dark mb-3" >
-          <div class="card-header"><h3>Juega piedra,papel,tijera,lagarto,spock</h3></div>
-            <div class="card-body">
-              <h5 class="card-title">Selecciona tu jugada!</h5>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="piedra"/>
-                <label class="form-check-label" for="inlineRadio1">Piedra</label>
+        <div className="juego card text-white bg-dark mb-3" >
+          <div className="card-header"><h3>Juega piedra, papel, tijera, lagarto, spock</h3></div>
+            <div className="card-body">
+              <h5 className="card-title">Selecciona tu jugada!</h5>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="piedra" onClick={handleOnClick}/>
+                <label className="form-check-label" for="inlineRadio1">Piedra</label>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="papel"/>
-                <label class="form-check-label" for="inlineRadio1">Papel</label>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="papel" onClick={handleOnClick}/>
+                <label className="form-check-label" for="inlineRadio1">Papel</label>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="tijera"/>
-                <label class="form-check-label" for="inlineRadio1">Tijera</label>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="tijera" onClick={handleOnClick}/>
+                <label className="form-check-label" for="inlineRadio1">Tijera</label>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="lagarto"/>
-                <label class="form-check-label" for="inlineRadio1">Lagarto</label>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="lagarto" onClick={handleOnClick}/>
+                <label className="form-check-label" for="inlineRadio1">Lagarto</label>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="spock"/>
-                <label class="form-check-label" for="inlineRadio1">Spock</label>
-              </div>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="spock" onClick={handleOnClick}/>
+                <label className="form-check-label" for="inlineRadio1">Spock</label>
+              </div>   
           </div>
+          {inicioPartida && <div class="alert alert-info" role="alert">Jugada elegida: {jugada}, jugada app: {jugadaApp}</div>}
+          {noEligioJugada && <div class="alert alert-warning" role="alert">Tiene que elegir una jugada</div>}
+          {!inicioPartida && <button type="button" class="btn btn-info" onClick={jugar}>Jugar!</button>}
+          {inicioPartida && <button type="button" class="btn btn-info" onClick={reset}>Volver a jugar</button>}
         </div>
-
+        
         <div className="juego">
           
         </div>
