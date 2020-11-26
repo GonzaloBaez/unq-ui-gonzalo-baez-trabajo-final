@@ -2,21 +2,21 @@
 .reglas{
   float:left;
   width: fit-content;
-  margin-left: 1vw;
-  margin-right: 1vw;
-  margin-top: 4vh;
-  margin-bottom: 0.5vw;
+  
+  margin-top: 2vh;
+  
+  
   
 }
 
 .resultado{
-  float: right;
+  float:left;
   margin-top: 2vh;
   margin-left: 3vw;
-  width: 20vw;
+  width: fit-content;
+  
   
 }
-
 
 .card-text{
   padding-right: 3vh;
@@ -26,7 +26,8 @@
   margin-top: 2vh;
   margin-left: 2vw;
   width: fit-content;
-  float: left;
+  float:left;
+  
 }
 
 .form-check-label{

@@ -100,6 +100,27 @@ function App() {
           {noEligioJugada && <div class="alert alert-warning" role="alert">Tiene que elegir una jugada</div>}
           {!inicioPartida && <button type="button" class="btn btn-info" onClick={jugar}>Jugar!</button>}
           {inicioPartida && <button type="button" class="btn btn-info" onClick={reset}>Volver a jugar</button>}
+        </div>
+        
+        <div className="resultado">
+          <table class="table table-sm table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ganadas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Jugador</th>
+                <td>{ganadasJugador}</td>
+              </tr>
+              <tr>
+                <th scope="row">App</th>
+                <td>{ganadasApp}</td>
+              </tr>
+            </tbody>
+          </table>
 
           <div className="reglas">
             <div class="card text-white bg-secondary mb-3">
@@ -119,28 +140,9 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="resultado">
-          <table class="table table-sm table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Ganadas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Jugador</th>
-                <td>{ganadasJugador}</td>
-              </tr>
-              <tr>
-                <th scope="row">App</th>
-                <td>{ganadasApp}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        </div>
+        
         
     </>
   );
