@@ -17,6 +17,7 @@ function App() {
   const [resultado,setResultado] = useState()
   const [ganadasApp,setGanadasApp] = useState(0)
   const [ganadasJugador,setGanadasJugador] = useState(0)
+  const [claseSegunResultado,setclaseSegunResultado] =  useState()
   
   const numeroAleatorio = () =>{
     return Math.floor(Math.random() * (jugadas.length))
@@ -35,15 +36,18 @@ function App() {
 
   const setResultadoPartida= (jugadaDeApp) => {
     let esEmpate = jugada == jugadaDeApp.nombre
-    let ganoPartida = !jugadaDeApp.ganaA.some(elem => elem == jugada) 
+    let ganoPartida = !jugadaDeApp.ganaA.some(elem => elem == jugada)
     if(esEmpate){
       setResultado("Empate!! Vuelve a jugar para ganar ;)")
+      setclaseSegunResultado("alert-warning")
     }else if(ganoPartida){
       setResultado("Ganaste!! Podras hacerlo de nuevo? ;)")
       setGanadasJugador(ganadasJugador+1)
+      setclaseSegunResultado("alert-success")
     }else{
-      setResultado("Perdiste, una lastima :(. Lo intentas de nuevo?")
+      setResultado("Perdiste, una lastima :( Lo intentas de nuevo?")
       setGanadasApp(ganadasApp+1)
+      setclaseSegunResultado("alert-danger")
     }
   }
   
@@ -94,8 +98,8 @@ function App() {
                 <label className="form-check-label" for="inlineRadio1">Spock</label>
               </div>   
           </div>
-          {inicioPartida && <div class="alert alert-info" role="alert">
-            Jugada elegida: {jugada}, jugada app: {jugadaApp.nombre}. {resultado}
+          {inicioPartida && <div class={"alert "+ claseSegunResultado} role="alert">
+            <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
             </div>}
           {noEligioJugada && <div class="alert alert-warning" role="alert">Tiene que elegir una jugada</div>}
           {!inicioPartida && <button type="button" class="btn btn-info" onClick={jugar}>Jugar!</button>}
