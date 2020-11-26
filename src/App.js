@@ -3,6 +3,7 @@ import React, {useState,useEffect} from 'react';
 import './App.css';
 import  Reglas from './Reglas.js';
 import ResultadoGlobal from './ResultadoGlobal';
+import SelectorDeJugada from './SelectorDeJugada';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
                     {nombre:"Papel",ganaA:["Piedra","Spock"]},
                     {nombre:"Tijera",ganaA:["Lagarto","Papel"]},
                     {nombre:"Lagarto",ganaA:["Spock","Papel"]},
-                    {nombre:"Spock",ganaA:["Tijeras","Piedra"]}]
+                    {nombre:"Spock",ganaA:["Tijera","Piedra"]}]
   const [inicioPartida,setInicioPartida] = useState(false)
   const [jugadaApp,setJugadaApp]= useState()
   const [noEligioJugada,setNoEligioJugada] = useState(false)
@@ -76,30 +77,9 @@ function App() {
   return (
     <>
         <div className="juego card text-white bg-dark mb-3" >
-          <div className="card-header"><h3>Juega piedra, papel, tijera, lagarto, spock</h3></div>
-            <div className="card-body">
-              <h5 className="card-title">Selecciona tu jugada!</h5>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Piedra" onClick={handleOnClick}/>
-                <label className="form-check-label" for="inlineRadio1">Piedra</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Papel" onClick={handleOnClick}/>
-                <label className="form-check-label" for="inlineRadio1">Papel</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Tijera" onClick={handleOnClick}/>
-                <label className="form-check-label" for="inlineRadio1">Tijera</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Lagarto" onClick={handleOnClick}/>
-                <label className="form-check-label" for="inlineRadio1">Lagarto</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Spock" onClick={handleOnClick}/>
-                <label className="form-check-label" for="inlineRadio1">Spock</label>
-              </div>   
-          </div>
+          
+          <SelectorDeJugada jugadas={jugadas} handleOnClick={handleOnClick}/>
+          
           {inicioPartida && <div class={"alert "+ claseSegunResultado} role="alert">
             <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada de la app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
             </div>}
