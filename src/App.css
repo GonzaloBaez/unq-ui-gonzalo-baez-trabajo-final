@@ -1,18 +1,52 @@
 
 .reglas{
-  height: 99vh;
   float:left;
+  width: fit-content;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 4vh;
+  margin-bottom: 0.5vw;
   
-  width: 24vw;
+}
+
+.resultado{
+  float: right;
+  margin-top: 2vh;
+  margin-left: 3vw;
+  width: 20vw;
+  
+}
+
+
+.card-text{
+  padding-right: 3vh;
 }
 
 .juego{
-  margin-right: 2vw;
   margin-top: 2vh;
+  margin-left: 2vw;
+  width: fit-content;
+  float: left;
 }
 
 .form-check-label{
   color: rgb(255, 255, 255);
+}
+
+
+.btn{
+  margin-left: 1vw;
+  margin-right: 0.5vw;
+  margin-top: 1vh;
+  margin-bottom: 0.5vw;
+  width: fit-content;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+.alert{
+  margin-left: 1vw;
+  width: fit-content;
 }
 
 
