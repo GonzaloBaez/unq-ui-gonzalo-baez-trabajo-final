@@ -77,9 +77,7 @@ function App() {
   return (
     <>
         <div className="juego card text-white bg-dark mb-3" >
-          
           <SelectorDeJugada jugadas={jugadas} handleOnClick={handleOnClick}/>
-          
           {inicioPartida && <div class={"alert "+ claseSegunResultado} role="alert">
             <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada de la app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
             </div>}
@@ -87,7 +85,6 @@ function App() {
           {!inicioPartida && <button type="button" class="btn btn-info" onClick={jugar}>Jugar!</button>}
           {inicioPartida && <button type="button" class="btn btn-info" onClick={reset}>Volver a jugar</button>}
         </div>
-        
         <div className="resultado">
           <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} />
           <Reglas/>
