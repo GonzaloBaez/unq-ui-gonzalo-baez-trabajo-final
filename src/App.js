@@ -7,7 +7,7 @@ import  reglas from './reglas.jpg';
 function App() {
   const [jugada,setJugada]= useState()
   const [jugadas,setJugadas] = useState([{nombre:"Piedra",ganaA:["Lagarto","Tijera"]},
-                                        {nombre:"Papel",ganaA:["Piedra","Spoke"]},
+                                        {nombre:"Papel",ganaA:["Piedra","Spock"]},
                                         {nombre:"Tijera",ganaA:["Lagarto","Papel"]},
                                         {nombre:"Lagarto",ganaA:["Spock","Papel"]},
                                         {nombre:"Spock",ganaA:["Tijeras","Piedra"]}])
