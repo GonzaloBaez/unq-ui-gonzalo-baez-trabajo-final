@@ -4,7 +4,7 @@ import  Reglas from './Reglas.js';
 import ResultadoGlobal from './ResultadoGlobal';
 import SelectorDeJugada from './SelectorDeJugada';
 
-function VsJugador(){
+function VsJugador({nombreJug1,nombreJug2}){
     
   const [jugadaJugador1,setJugadaJugador1]= useState()
   const jugadas = [ {nombre:"Piedra",ganaA:["Lagarto","Tijera"]},
@@ -22,9 +22,9 @@ function VsJugador(){
 
   const [jugador1ConfirmoJugada,setJugador1ConfirmoJugada] = useState(false)
 
-  const [nombreJugador1,setNombreJugador1] = useState('Jugador 1')
-
-  const [nombreJugador2,setNombreJugador2] = useState('Jugador 2')
+  const [nombreJugador1,setNombreJugador1] = useState(nombreJug1)
+  const [nombreJugadorEligiendo,setNombreJugadorEligiendo] = useState(nombreJug1)
+  const [nombreJugador2,setNombreJugador2] = useState(nombreJug2)
   
   const handleOnClick = (event) =>{
     if(jugador1ConfirmoJugada){
@@ -55,16 +55,16 @@ function VsJugador(){
     let ganoPartida = !jugadaDeApp.ganaA.some(elem => elem == jugadaJugador1.nombre)
     // matriz  de resultado. buscar
     if(esEmpate){
-      setResultado("Empate!! Vuelve a jugar")
-      setclaseSegunResultado("alert-success")
+      setResultado("Empate!!")
+      setclaseSegunResultado("alert-warning")
     }else if(ganoPartida){
-      setResultado("Gano Jugador1!!")
+      setResultado("Gano " + nombreJugador1)
       setGanadasJugador(ganadasJugador+1)
-      setclaseSegunResultado("alert-success")
+      setclaseSegunResultado("alert-warning")
     }else{
-      setResultado("Gano jugador 2!!")
+      setResultado("Gano " + nombreJugador2)
       setGanadasApp(ganadasApp+1)
-      setclaseSegunResultado("alert-success")
+      setclaseSegunResultado("alert-warning")
     }
   }
   
@@ -82,6 +82,7 @@ function VsJugador(){
         setNoEligioJugada(false)
         borrarSeleccionJugador()
         setJugador1ConfirmoJugada(true)
+        setNombreJugadorEligiendo(nombreJugador2)
     }else{
         setNoEligioJugada(true)
     } 
@@ -109,20 +110,20 @@ function VsJugador(){
         <div className="juego card text-white bg-dark mb-3" >
           <div className="card-header"><h3>Juega piedra, papel, tijera, lagarto, spock</h3></div>
             <div className="card-body">
-            <h5 className="card-title">{"Selecciona tu jugada " + nombreJugador1}</h5>  
+            <h5 className="card-title">{"Selecciona tu jugada " + nombreJugadorEligiendo}</h5>  
             <SelectorDeJugada jugadas={jugadas} handleOnClick={handleOnClick}/>
-          </div>
+            </div>
 
           {eligieronLosDos && <div class={"alert "+ claseSegunResultado} role="alert">
-            <p><strong>Jugada elegida</strong>: {jugadaJugador1.nombre}.</p> <p><strong>Jugada de la app</strong>: {jugadaJugador2.nombre}.</p> <p>{resultado}.</p>
+            <p><strong>Jugada de {nombreJugador1}</strong>: {jugadaJugador1.nombre}.</p> <p><strong>Jugada de {nombreJugador2}</strong>: {jugadaJugador2.nombre}.</p> <p>{resultado}.</p>
             </div>}
           {noEligioJugada && <div class="alert alert-warning" role="alert">Tiene que elegir una jugada</div>}
-          {!eligieronLosDos && !jugador1ConfirmoJugada && <button type="button" class="btn btn-info" onClick={cambiarAJugador2} disabled={!jugadaJugador1}>Confirmar Jugada Jugador 1</button>}
-          {!eligieronLosDos && !!jugador1ConfirmoJugada && <button type="button" class="btn btn-info" onClick={jugar} disabled={!jugadaJugador2}>Confirmar Jugada Jugador 2</button>}
+          {!eligieronLosDos && !jugador1ConfirmoJugada && <button type="button" class="btn btn-info" onClick={cambiarAJugador2} disabled={!jugadaJugador1}>Confirmar Jugada </button>}
+          {!eligieronLosDos && !!jugador1ConfirmoJugada && <button type="button" class="btn btn-info" onClick={jugar} disabled={!jugadaJugador2}>Confirmar Jugada</button>}
           {eligieronLosDos && <button type="button" class="btn btn-info" onClick={reset}>Volver a jugar</button>}
         </div>
         <div className="resultado">
-          <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} />
+          <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} nombreJugador1={nombreJugador1} nombreJugador2={nombreJugador2} />
           <Reglas/>
         </div>
 

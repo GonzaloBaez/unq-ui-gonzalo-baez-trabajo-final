@@ -1,6 +1,6 @@
 
 
-function ResultadoGlobal({ganadasJugador,ganadasApp}){
+function ResultadoGlobal({ganadasJugador,ganadasApp,nombreJugador1,nombreJugador2}){
     return(
         <>
             <table class="table table-sm table-dark">
@@ -12,11 +12,11 @@ function ResultadoGlobal({ganadasJugador,ganadasApp}){
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">Jugador</th>
-                    <   td>{ganadasJugador}</td>
+                        <th scope="row">{nombreJugador1}</th>
+                        <td>{ganadasJugador}</td>
                     </tr>
                     <tr>
-                        <th scope="row">App</th>
+                        <th scope="row">{nombreJugador2}</th>
                         <td>{ganadasApp}</td>
                     </tr>
                 </tbody>

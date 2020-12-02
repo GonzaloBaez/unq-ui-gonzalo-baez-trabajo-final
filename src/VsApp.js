@@ -80,7 +80,7 @@ function VsApp(){
             <div className="card-body">
             <h5 className="card-title">Selecciona tu jugada!</h5>  
             <SelectorDeJugada jugadas={jugadas} handleOnClick={handleOnClick}/>
-          </div>
+            </div>
           {inicioPartida && <div class={"alert "+ claseSegunResultado} role="alert">
             <p><strong>Jugada elegida</strong>: {jugada}.</p> <p><strong>Jugada de la app</strong>: {jugadaApp.nombre}.</p> <p>{resultado}.</p>
             </div>}
@@ -89,7 +89,7 @@ function VsApp(){
           {inicioPartida && <button type="button" class="btn btn-info" onClick={reset}>Volver a jugar</button>}
         </div>
         <div className="resultado">
-          <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} />
+          <ResultadoGlobal ganadasJugador={ganadasJugador} ganadasApp={ganadasApp} nombreJugador1="Jugador" nombreJugador2="App"/>
           <Reglas/>
         </div>
 
