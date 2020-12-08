@@ -56,15 +56,15 @@ function VsJugador({nombreJug1,nombreJug2}){
     // matriz  de resultado. buscar
     if(esEmpate){
       setResultado("Empate!!")
-      setclaseSegunResultado("alert-warning")
+      setclaseSegunResultado("alert-primary")
     }else if(ganoPartida){
       setResultado("Gano " + nombreJugador1)
       setGanadasJugador(ganadasJugador+1)
-      setclaseSegunResultado("alert-warning")
+      setclaseSegunResultado("alert-primary")
     }else{
       setResultado("Gano " + nombreJugador2)
       setGanadasApp(ganadasApp+1)
-      setclaseSegunResultado("alert-warning")
+      setclaseSegunResultado("alert-primary")
     }
   }
   
