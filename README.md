@@ -23,9 +23,6 @@ necesarias para poder levantar el proyecto. Esto se hace con el siguiente comand
 
 ```$ npm install```
 
-Ademas, es necesario instalar la dependencia react-route-dom.
-
-```$ npm install react-router-dom```.
 
 ## Ejecutar el proyecto
 Una vez realizado lo anterior mencionado y con la terminal ubicada en el repositorio
